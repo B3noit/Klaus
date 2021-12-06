@@ -3,12 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Runtime/Online/HTTP/Public/Http.h"
 #include "ServerManager.generated.h"
 
-/**
- * 
- */
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnCallKlaus, int, NumberIDScreamer);
+
 UCLASS()
 class KLAUS_API UServerManager : public UObject
 {
@@ -23,5 +21,9 @@ public: // Methods
 
 	UServerManager();
 
-	
+	UFUNCTION(BlueprintCallable)
+	void CallKlaus();
+
+	UPROPERTY(BlueprintAssignable)
+	FOnCallKlaus OnCallKlaus;
 };

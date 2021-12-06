@@ -3,18 +3,26 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Runtime/Online/HTTP/Public/Http.h"
+#include "HttpModule.h"
 #include "KlausAPI.generated.h"
 
-/**
- * 
- */
 UCLASS()
-class KLAUS_API UKlausAPI : public UBlueprintFunctionLibrary
-{
+class KLAUS_API UKlausAPI :  public UBlueprintFunctionLibrary {
 	GENERATED_BODY()
-public: // Variables 
 
+public: // Variables
+    
 public: // Methods 
-    static TSharedRef<class IHttpRequest> MakeRequest(TSharedPtr<class FJsonObject> Params);
+	static TSharedRef<class IHttpRequest, ESPMode::ThreadSafe> MakeRequest(
+		FString FunctionName,
+		TSharedPtr<class FJsonObject> Params
+	);
+    
+	static FString MakeBodyJson(FString FunctionName, TSharedPtr<class FJsonObject> Params);
+
+	static TSharedRef<class IHttpRequest, ESPMode::ThreadSafe> MakeRequest(
+	FString FunctionName
+);
+
+	static FString MakeBodyJson(FString FunctionName);
 };
